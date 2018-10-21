@@ -1,10 +1,9 @@
 #!/usr/bin/python
 
-
-from src import edi_style_namer
 from src import ui
 from src import csv_splitter
 from src import edi_set
+from src import file_generator
 
 if __name__ == '__main__':
 
@@ -39,6 +38,10 @@ if __name__ == '__main__':
                 value = creator.edi_names
                 key = creator.style_names
                 print(value, key)
+
+            fg = file_generator.File_generator(current_ui.raw_photo_dir_path)
+
+            fg.create_edi_styles(edi_creators)
 
             #ui.UI.clear_screen()
             #current_ui.print_preview(en.get_names())

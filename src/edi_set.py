@@ -1,3 +1,5 @@
+import re
+
 
 class EdiSet:
 
@@ -10,7 +12,10 @@ class EdiSet:
             style_col = row[5]
             
             if edi_col != "CUSTOMER PROFILE" and len(edi_col) != 0:
-                self.edi_names.append(edi_col.replace("\xa0", ""))
+                edi_name = edi_col.replace("\xa0", "")
+                self.edi_names.append(edi_name)
 
             if style_col != "STYLE #" and len(style_col) != 0:
-                self.style_names.append(style_col.replace("\xa0", ""))
+                output_name = style_col.replace("\xa0", "")
+                parsed_output = re.sub(r'\W+', '', output_name).upper()
+                self.style_names.append(parsed_output)
