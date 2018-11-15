@@ -12,7 +12,7 @@ if __name__ == '__main__':
     incorrect_path = None
 
     while repeating:
-        #ui.UI.clear_screen()
+        ui.UI.clear_screen()
 
         if retry:
             ui.UI.path_error_message(incorrect_path)
@@ -39,12 +39,13 @@ if __name__ == '__main__':
                 key = creator.style_names
                 print(value, key)
 
-            fg = file_generator.File_generator(current_ui.raw_photo_dir_path)
+            fg = file_generator.File_generator(current_ui.photo_dir_path)
 
             fg.create_edi_styles(edi_creators)
 
             #ui.UI.clear_screen()
-            #current_ui.print_preview(en.get_names())
+
+            repeating = False
 
         except ValueError:
             incorrect_path = current_ui.csv_file_path

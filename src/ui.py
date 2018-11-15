@@ -15,15 +15,20 @@ class UI:
     def __init__(self):
             print(self.ask_for_csv_input)
             self.raw_csv_file_path = raw_input(self.arrow)
-            self.csv_file_path = self.raw_csv_file_path.strip().strip("'")
+            self.csv_file_path = self.strip_input_paths(self.raw_csv_file_path)
+            if self.csv_file_path == "X".lower():
+                self.force_quit = True
+                return
             print(self.csv_file_path)
 
             print(self.ask_for_photo_dir_input)
             self.raw_photo_dir_path = raw_input(self.arrow)
-            self.photo_dir_path = self.raw_photo_dir_path.strip().strip("'")
+            self.photo_dir_path = self.strip_input_paths(self.raw_photo_dir_path)
             print(self.photo_dir_path)
-            if self.csv_file_path == "X".lower():
+            if self.photo_dir_path == "X".lower():
                 self.force_quit = True
+                return
+            print(self.photo_dir_path)
 
     def print_preview(self, list_of_expected_names):
         print(self.preview_header)
@@ -32,6 +37,11 @@ class UI:
 
     def exit_message(self):
         print(self.exit_msg)
+
+    def strip_input_paths(self, input_path):
+        stripped_path_input =  input_path.strip().strip("'").strip('"')
+        abs_path = os.path.abspath(stripped_path_input)
+        return abs_path
 
     @classmethod
     def clear_screen(self):
